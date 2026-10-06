@@ -17,13 +17,15 @@ maintained by the ShikshaLokam ecosystem team.
 
 ## Reading the numbers honestly
 
-The dashboard is built on a working copy of the team's partner tracker, and it
-is deliberate about its own gaps rather than hiding them:
+The dashboard is built from the team's live CSO Ecosystem Tracker and its
+Partner Meeting Hub, refreshed every **Monday, Wednesday and Friday**. Changes
+the refresh cannot explain are held for the team rather than published. It is
+deliberate about its own gaps rather than hiding them:
 
 - **A blank means a blank in the tracker.** Nothing is inferred, averaged, or
   filled with a plausible value.
-- Three things are absent for *every* partner because no column records them:
-  stage-entry dates, engagement level, and block-level geography. The pages say
+- Some things are absent for *every* partner because no column records them,
+  such as stage-entry dates and block-level geography. The pages say
   so in place instead of rendering an empty timeline that reads as
   "nothing happened".
 - Not every partner has geography recorded, so the map shows fewer partners than
@@ -42,5 +44,7 @@ Stage 1 Aware · Stage 2 Understanding · Stage 3 Aligned · Stage 4 Contributin
 Stage 5 Champion. Map boundaries are ShikshaLokam's own India map, as used in the
 Shikshagraha dashboard.
 
-Contact details, individuals' names and financial figures are excluded by an
-automated check that runs on every build and blocks publication if it finds any.
+Partner contact details (emails, phone numbers) and financial figures are
+excluded by an automated check that runs on every build and blocks publication
+if it finds any. Partner stages, engagement notes and the ShikshaLokam team
+members who own each relationship are shown deliberately.
