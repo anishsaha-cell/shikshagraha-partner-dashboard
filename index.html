@@ -1719,7 +1719,7 @@ window.MITRA_DATA = {
   "in_progress_sessions": 79,
   "not_live": "This is a point-in-time snapshot, not a live figure -- the dashboard's own count keeps moving as more Samvaad attendees complete the bot. Re-fetch and overwrite this file to refresh; nothing regenerates it automatically, matching contact.json and engagement-log.json."
 };
-window.CHECK_DATA = {"last_check": "2026-11-24T11:51+05:30", "result": "published", "schedule": "Mon, Wed, Fri", "next_due": "2026-11-25"};
+window.CHECK_DATA = {"last_check": "2026-11-24T11:55+05:30", "result": "published", "schedule": "Mon, Wed, Fri", "next_due": "2026-11-25"};
 (function(){
 var D=window.PARTNER_DATA, M=D.meta, ALL=D.partners, COV=M.data_coverage||{};
 var view=document.getElementById('view'), crumb=document.getElementById('crumb');
@@ -28080,7 +28080,11 @@ function samvaadCompact(e){
 function upcomingBlock(){
   /* Anish, 2026-11-16: a row with an exact day date also earns its own line
      while its title is still TBD (date_exact, set in bin/microsite.py). */
-  function featured(r){return (r.title&&r.title.trim())||r.date_exact;}
+  /* Anish, 2026-11-24: Upcoming lists ONLY Samvaads whose date is decided -
+     an exact day on the tracker ("2 Dec 2026", "17-18 Nov 2026"). A title
+     alone no longer earns a line, and rows dated TBD, a month, a quarter or
+     "No response" are left out entirely, including the count sentence. */
+  function featured(r){return !!r.date_exact;}
   var named=PIPE.filter(featured);
   var others=PIPE.filter(function(r){return !featured(r);});
   var otherOrgs={},otherSilent={};
@@ -28113,11 +28117,11 @@ function upcomingBlock(){
      while the real count is still short of the forecast, so it disappears
      on its own once a rebuild brings otherN to 20 for real - nobody has to
      remember to delete it. */
-  var pn=M.samvaad_pipeline_note;
+  var pn=null; otherN=0; /* undated rows are not shown - Anish, 2026-11-24 */
 
   return '<section class="card"><h2>Upcoming Samvaads</h2>'+
     (named.length?'<ul class="list">'+named.map(row).join('')+'</ul>'
-      :'<p class="empty">No named upcoming Samvaad on the tracker right now.</p>')+
+      :'<p class="empty">No upcoming Samvaad with a decided date on the tracker right now.</p>')+
     (otherN?'<p class="why" style="margin-top:'+(named.length?'12px':'0')+'">'+
       '<b>'+otherN+' more organisation'+(otherN===1?'':'s')+'</b> '+
       (otherN===1?'is':'are')+' expected to host a Samvaad - dates TBD.'+
